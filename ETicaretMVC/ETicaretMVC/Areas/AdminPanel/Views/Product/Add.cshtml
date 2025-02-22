@@ -1,0 +1,77 @@
+﻿ @model ProductAddViewModel
+<style>
+    .container-fluid {
+        overflow: auto;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            @ViewBag.ErrorMessage
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-11">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Yeni Ürün Ekleme</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form action="/Admin/Product/Add" method="post" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ürün Adı</label>
+                            <input type="text" name="Name" class="form-control" placeholder="Ürün Adı">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ürün Fiyat</label>
+                            <input type="text" name="Price" class="form-control" placeholder="Ürün Fiyat">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ürün Stok</label>
+                            <input type="text" name="Stock" class="form-control" placeholder="Ürün Stok">
+                        </div>
+                        @* <div class="form-group">
+                        <label for="exampleInputEmail1">Ürün Açıklaması</label>
+                        <input type="text" name="Description" class="form-control" placeholder="Ürün Stok">
+                        </div> *@
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ürün Açıklaması</label>
+                            <textarea name="Description" class="form-control" placeholder="Ürün Açıklaması"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ürün Kategorisi</label>
+                            <select class="form-control" name="CategoryId">
+                                <option value="-1">Seçiniz</option>
+                                @foreach (var item in Model.CategoryList)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+
+
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputFile">Ürün Resimleri</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" name="Photo" class="custom-file-input" id="fuPhoto" multiple>
+                                    <label class="custom-file-label" for="exampleInputFile">Ürün Resmi Seçiniz</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="btn btn-primary">KAYDET</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

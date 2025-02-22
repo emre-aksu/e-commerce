@@ -1,0 +1,10 @@
+﻿/* Tablo içeriği için kaydırma ve yükseklik ayarları */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.card-body {
+    height: calc(90vh - 100px); /* İhtiyacınıza göre yükseklik ayarını yapın */
+    overflow-y: auto; /* İçeriğin dikey kaydırılmasını sağlar */
+    padding: 30px;
+}

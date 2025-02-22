@@ -1,0 +1,94 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS Linki -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Ödeme Sayfası</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3 class="card-title">Ödeme Sayfası</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Başarı Mesajı -->
+                        @if(ViewBag.SuccessMessage != null)
+                        {
+                            <div class="alert alert-success text-center">
+                                @ViewBag.SuccessMessage
+                            </div>
+                            <!-- Listeye Dön Butonu -->
+                            <div class="text-center">
+                                <a href="/User/Product/List" class="btn btn-primary">Listeye Dön</a>
+                            </div>
+                        }
+                        <!-- Hata Mesajı -->
+                        @if(ViewBag.ErrorMessage != null)
+                        {
+                            <div class="alert alert-danger text-center">
+                                @ViewBag.ErrorMessage
+                            </div>
+                        }
+
+                        <!-- Ödeme Formu Başlangıcı -->
+                        <form action="/User/Payment/Add" method="post" enctype="multipart/form-data">
+                            
+                            <!-- Kart İsmi -->
+                            <div class="form-group mb-3">
+                                <label for="CardHolderName" class="form-label">Kart İsmi</label>
+                                <input type="text" name="CardHolderName" class="form-control" id="CardHolderName" placeholder="Kart Adı">
+                                @if(ViewBag.CategoryNameError != null)
+                                {
+                                    <span class="text-danger">@ViewBag.CategoryNameError</span>
+                                }
+                            </div>
+
+                            <!-- Kart Numarası -->
+                            <div class="form-group mb-3">
+                                <label for="CardNumber" class="form-label">Kart Numarası</label>
+                                <input type="text" name="CardNumber" class="form-control" id="CardNumber" placeholder="Kart Numarası">
+                            </div>
+
+                            <!-- Son Kullanma Tarihi -->
+                            <div class="form-group mb-3">
+                                <label for="ExpiryDate" class="form-label">Son Kullanma Tarihi</label>
+                                <input type="text" name="ExpiryDate" class="form-control" id="ExpiryDate" placeholder="Son Kullanma Tarihi">
+                            </div>
+
+                            <!-- CVV -->
+                            <div class="form-group mb-3">
+                                <label for="CVV" class="form-label">Cvv</label>
+                                <input type="text" name="CVV" class="form-control" id="CVV" placeholder="Cvv">
+                            </div>
+
+                            <!-- Fiyat -->
+                            <div class="form-group mb-3">
+                                <label for="Amount" class="form-label">Fiyat</label>
+                                <input type="text" name="Amount" class="form-control" id="Amount" placeholder="Fiyat">
+                            </div>
+
+                            <!-- Gönder Butonu -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Gönder</button>
+                            </div>
+                        </form>
+                        <!-- Form Bitişi -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS ve gerekli scriptler -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

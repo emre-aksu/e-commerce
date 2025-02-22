@@ -1,0 +1,118 @@
+﻿@model EmployeeResponse
+
+<div class="container-fluid ml-5 ">
+    <div class="row">
+        <div class="col">
+            @ViewBag.ErrorMessage
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-11">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Personel Düzenleme</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form action="/Admin/Employee/Edit" method="post" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input type="hidden" name="Id" value="@Model.Id" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtFirstName">Personel Adı</label>
+                            <input type="text" name="FirstName" class="form-control" id="txtFirstName" placeholder="Personel Adı" value="@Model.FirstName">
+                            <span style="color:red;">
+                                @ViewBag.CategoryNameError
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtLastName">SoyAdı</label>
+                            <input type="text" name="LastName" class="form-control" id="txtLastName" placeholder="SoyAdı" value="@Model.LastName">
+                            <span style="color:red;">
+                                @ViewBag.CategoryNameError
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="dtHireDate">İşe Giriş Tarihi</label>
+                            <input type="date" name="HireDate" class="form-control" id="dtHireDate" value="@Model.HireDate.ToString("yyyy-MM-dd")">
+                            <span style="color:red;">
+                                @ViewBag.HireDateError
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dtBirthDate">Doğum Tarihi</label>
+                            <input type="date" name="BirthDate" class="form-control" id="dtBirthDate" value="@Model.BirthDate.ToString("yyyy-MM-dd")">
+                            <span style="color:red;">
+                                @ViewBag.BirthDateError
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtAddress">Adres</label>
+                            <input type="text" name="Address" class="form-control" id="txtAddress" placeholder="Adresi" value="@Model.Address">
+                            <span style="color:red;">
+                                @ViewBag.CategoryNameError
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtCity">Şehir</label>
+                            <input type="text" name="City" class="form-control" id="txtCity" placeholder="Şehir" value="@Model.City">
+                            <span style="color:red;">
+                                @ViewBag.CategoryNameError
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtCountry">Ülke</label>
+                            <input type="text" name="Country" class="form-control" id="txtCountry" placeholder="Ülke" value="@Model.Country">
+                            <span style="color:red;">
+                                @ViewBag.CategoryNameError
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtUserName">Kullanıcı Adı</label>
+                            <input type="text" name="UserName" class="form-control" id="txtUserName" placeholder="Kullanıcı Adı" value="@Model.UserName">
+                            <span style="color:red;">
+                                @ViewBag.CategoryNameError
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtPassword">Şifre</label>
+                            <input type="password" name="Password" class="form-control" id="txtPassword" placeholder="Şifre" value="@Model.Password">
+                            <span style="color:red;">
+                                @ViewBag.CategoryNameError
+                            </span>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="fuPhoto">Personel Resimi</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" name="Photo" class="custom-file-input" id="fuPhoto">
+                                    <label class="custom-file-label" for="fuPhoto">Personel Resimi Seçiniz</label>
+                                    <span style="color:red;">
+                                        @ViewBag.PhotoError
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

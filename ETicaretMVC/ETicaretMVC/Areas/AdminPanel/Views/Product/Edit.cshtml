@@ -1,0 +1,95 @@
+﻿@using ETicaretMVC.Areas.AdminPanel.APITypes
+@model ProductResponse
+
+<div class="container-fluid ml-5">
+    <div class="row">
+        <div class="col">
+            @ViewBag.ErrorMessage
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-11">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Ürün Düzenleme</h3>
+                </div>
+                <form action="/Admin/Product/Edit" method="post" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input type="hidden" name="Id" value="@Model.Id" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtProductName">Ürün Adı</label>
+                            <input type="text" name="Name" class="form-control" id="txtProducctName" placeholder="Ürün Adı" value="@Model.Name">
+                            <span style="color:red;">
+                                @ViewBag.NameError
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtUnitPrice">Ürün Fiyat</label>
+                            <input type="text" name="Price" class="form-control" id="txtUnitPrice" placeholder="Ürün Fiyat" value="@Model.Price">
+                            <span style="color:red;">
+                                @ViewBag.PriceError
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtUnitsInStock">Ürün Stok</label>
+                            <input type="text" name="Stock" class="form-control" id="UnitsInStock" placeholder="Ürün Stok" value="@Model.Stock">
+                            <span style="color:red;">
+                                @ViewBag.StockError
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtDescription">Ürün Açıklaması</label>
+                            <textarea class="form-control" name="Description" id="txtDescription" rows="3" placeholder="Açıklama giriniz" style="height:156px">@Model.Description</textarea>
+                            <span style="color:red;">
+                                @ViewBag.DescriptionError
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Kategori Resim (Aktif)</label>
+                            <img src="@Model.PhotoPath" style="width:250px;" />
+                        </div>
+                        <div class="form-group">
+                            <label for="categorySelect">Kategori Seçiniz</label>
+                            <select name="CategoryId" class="form-control" id="categorySelect">
+                                @foreach (var category in Model.CategoryList)
+                                {
+                                    <option value="@category.Id" @(Model.CategoryId == category.Id ? "selected" : "")>
+                                        @category.Name
+                                    </option>
+                                }
+                            </select>
+                            <span style="color:red;">
+                                @ViewBag.CategoryError
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fuPhoto">Ürün Resmi</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" name="Photo" class="custom-file-input" id="fuPhoto">
+                                    <label class="custom-file-label" for="fuPhoto">Ürün Resmi Seçiniz</label>
+                                    <span style="color:red;">
+                                        @ViewBag.PhotoError
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

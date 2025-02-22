@@ -1,0 +1,81 @@
+﻿<div class="container-fluid ml-5 ">
+    <div class="row">
+        <div class="col">
+            @ViewBag.ErrorMessage
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-11">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Yeni Personel Ekleme</h3>
+                </div>
+                <form action="/Admin/Employee/Add" method="post" enctype="multipart/form-data" id="employeeForm">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="txtFirstName">Personel Adı</label>
+                            <input type="text" name="FirstName" class="form-control" id="txtFirstName" placeholder="Personel Adı" required>
+                            <span style="color:red;">@ViewBag.FirstNameError</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtLastName">Personel Soyadı</label>
+                            <input type="text" name="LastName" class="form-control" id="txtLastName" placeholder="Soyadı" required>
+                            <span style="color:red;">@ViewBag.LastNameError</span>
+                        </div>
+                        @*   <div class="form-group">
+                        <label for="txtBirthDate">Doğum Tarihi</label>
+                        <input type="date" name="BirthDate" class="form-control" id="txtBirthDate" placeholder="Doğum Tarihi" required>
+                        <span style="color:red;">@ViewBag.BirthDateError</span>
+                        </div>
+                        <div class="form-group">
+                        <label for="txtHireDate">İşe Başlama Tarihi</label>
+                        <input type="date" name="HireDate" class="form-control" id="txtHireDate" placeholder="İşe Başlama Tarihi" required>
+                        <span style="color:red;">@ViewBag.HireDateError</span>
+                        </div> *@
+                        <div class="form-group">
+                            <label for="txtAddress">Personel Adres</label>
+                            <input type="text" name="Address" class="form-control" id="txtAddress" placeholder="Adres" required>
+                            <span style="color:red;">@ViewBag.AddressError</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtCity">Personel Şehir</label>
+                            <input type="text" name="City" class="form-control" id="txtCity" placeholder="Şehir" required>
+                            <span style="color:red;">@ViewBag.CityError</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtCountry">Personel Ülke</label>
+                            <input type="text" name="Country" class="form-control" id="txtCountry" placeholder="Ülke" required>
+                            <span style="color:red;">@ViewBag.CountryError</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtUserName">Personel Kullanıcı Adı</label>
+                            <input type="text" name="UserName" class="form-control" id="txtUserName" placeholder="Kullanıcı Adı" required>
+                            <span style="color:red;">@ViewBag.UserNameError</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtPassword">Personel Şifre</label>
+                            <input type="password" name="Password" class="form-control" id="txtPassword" placeholder="Şifre" required>
+                            <span style="color:red;">@ViewBag.PasswordError</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="fuPhoto">Personel Resmi</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" name="Photo" class="custom-file-input" id="fuPhoto" required>
+                                    <label class="custom-file-label" for="fuPhoto">Personel Resmi Seçiniz</label>
+                                    <span style="color:red;">@ViewBag.PhotoError</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

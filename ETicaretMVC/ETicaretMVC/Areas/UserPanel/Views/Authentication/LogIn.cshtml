@@ -1,0 +1,160 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Yönetici LogIn</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/admin/dist/css/adminlte.min.css">
+
+    <link href="~/admin/css/userpanelauthenti.css" rel="stylesheet" />
+
+</head>
+<body class="hold-transition login-page">
+
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Sign In</h3>
+
+                    <div class="d-flex justify-content-end social_icon">
+                        <span><i class="fab fa-facebook-square"></i></span>
+                        <span><i class="fab fa-google-plus-square"></i></span>
+                        <span><i class="fab fa-twitter-square"></i></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input id="txtUserName" type="text" class="form-control" placeholder="username">
+
+
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input id="txtPassword" type="password" class="form-control" placeholder="password">
+                        </div>
+                        <div class="row align-items-center remember">
+                            <input type="checkbox">Remember Me
+                        </div>
+                        <div class="form-group">
+                            <input id="btnLogIn" type="button" value="Login" class="btn float-right login_btn">
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account?<a href="#">Sign Up</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="#">Forgot your password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Raw(ViewBag.ErrorMessages)
+    <div id="divClientErrorMessages">
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="/admin/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/admin/dist/js/adminlte.min.js"></script>
+
+
+    <script>
+
+        $(document).ready(function () {
+            $("#btnLogIn").click(function () {
+                var userName = $("#txtUserName").val();
+                var password = $("#txtPassword").val();
+                var divErrorMessages = $("#divClientErrorMessages");
+
+
+                var errorMessages = "";
+
+                if (userName.length == 0) {
+                    errorMessages += "Kullanıcı Adı Boş Olamaz <br />";
+                }
+
+                if (password.length == 0) {
+                    errorMessages += "Şifre Boş Olamaz <br />";
+                }
+
+                if (errorMessages == "") {
+                    $(divErrorMessages).removeClass("alert alert-danger");
+                    $(divErrorMessages).html("");
+
+
+                    //$(divErrorMessages).remove();
+
+                    // SUNUCUYA GÖNDER
+
+                    var clientData =
+                    {
+                        UserName: $("#txtUserName").val(),
+                        Password: $("#txtPassword").val()
+                    };
+
+                    $.ajax({
+                        url: "/user/authentication/login",
+                        method: "post",
+                        datatype: "json",
+                        data: { dto: clientData },
+                        success: function (response) {
+                            if (!response.isSuccess) {
+                                $(divErrorMessages).html(response.message);
+                                $(divErrorMessages).addClass("alert alert-danger");
+
+
+                            }
+                            else {
+                                window.location.href = "/user/product/list";
+                            }
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    });
+
+
+                }
+                else {
+
+                    $(divErrorMessages).html(errorMessages);
+                    $(divErrorMessages).addClass("alert alert-danger");
+                }
+
+
+
+            });
+        });
+
+
+    </script>
+
+</body>
+</html>
+
