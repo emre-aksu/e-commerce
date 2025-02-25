@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineWS.Business.Contracts;
 using OnlineWSModel.Dtos.EmployeeDtos;
 
@@ -6,6 +7,7 @@ namespace OnlineWS.WebAPI.Controllers
 {
     [Route("api/employees")]
     [ApiController]
+    [Authorize]
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeManager _employeeManager;

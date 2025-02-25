@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineWS.Business.Contracts;
 using OnlineWSModel.Dtos.ProductDtos;
 
@@ -6,6 +7,7 @@ namespace OnlineWS.WebAPI.Controllers
 {
     [Route("api/products")]
     [ApiController]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IProductManager _productManager;

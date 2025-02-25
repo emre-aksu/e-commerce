@@ -1,4 +1,5 @@
-﻿   using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineWS.Business.Contracts;
 using OnlineWSModel.Dtos.CategoryDtos;
 
@@ -6,6 +7,7 @@ namespace OnlineWS.WebAPI.Controllers
 {
     [Route("api/categories")]
     [ApiController]
+    [Authorize]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryManager _categoryManager;
