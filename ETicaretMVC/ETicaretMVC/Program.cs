@@ -51,6 +51,8 @@ builder.Services.AddScoped<IValidator<CategoryAddDto>, CategoryAddDtoValidator>(
 builder.Services.AddScoped<IValidator<ProductAddDto>, ProductAddDtoValidator>();
 builder.Services.AddScoped<IValidator<UserLoginDto>, UserLoginDtoValidator>();
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -106,7 +106,7 @@ namespace ETicaretMVC.Areas.AdminPanel.Controllers
             var product = await _apiService.GetData<ProductResponse>($"products/{id}", token: null);
             var categories = await _apiService.GetData<List<Category>>("categories", token: null); // Tüm kategorileri al
 
-            product.CategoryList = categories; // Kategori listesini ekle
+          //  product.CategoryList = categories; // Kategori listesini ekle
 
             return View(product);
         }

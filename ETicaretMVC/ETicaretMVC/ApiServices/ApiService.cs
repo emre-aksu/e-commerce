@@ -1,4 +1,6 @@
-﻿using Microsoft.Net.Http.Headers;
+﻿using ETicaretMVC.Areas.AdminPanel.APITypes;
+using Microsoft.Net.Http.Headers;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -22,35 +24,41 @@ namespace ETicaretMVC.ApiServices
                 RequestUri = new Uri($"{baseAddress}{endPoint}"), // İstek yapılacak URL, baseAddress ve endPoint birleştirilerek oluşturuluyor.
                 Headers = { { HeaderNames.Accept, "application/json" } } // İstek başlığında JSON formatında veri kabul edileceği belirtiliyor.
             };
-
+            if (!string.IsNullOrEmpty(token)) // Eğer token boş değilse (yani token parametresi gönderilmişse).
+            {
+                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token); // İstek başlığına Bearer tipinde token ekleniyor.
+            }
             var responseMessage = await client.SendAsync(requestMessage); // DELETE isteği gönderiliyor ve yanıt bekleniyor.
 
             return responseMessage.IsSuccessStatusCode; // Yanıt başarılıysa true, değilse false döndürülüyor.
         }
 
 
-        public async Task<T> GetData<T>(string endPoint, string token = null)
+        public async Task<ResponseFromAPI<T>> GetData<T>(string endPoint, string token = null)
         {
-            var baseAddress = "http://localhost:5269/api/"; // API'nin temel adresi burada tanımlanıyor.
-            var client = _httpClientFactory.CreateClient(); // HTTP isteklerini yapmak için bir HttpClient nesnesi oluşturuluyor.
+            var baseAddress = "http://localhost:5269/api/";
+
+            var client = _httpClientFactory.CreateClient();
 
             var requestMessage = new HttpRequestMessage()
             {
-                Method = HttpMethod.Get, // GET isteği yapılacağını belirtiyor (genelde veri almak için kullanılır).
-                RequestUri = new Uri($"{baseAddress}{endPoint}"), // İstek yapılacak URL, baseAddress ve endPoint birleştirilerek oluşturuluyor.
-                Headers = { { HeaderNames.Accept, "application/json" } } // İstek başlığında JSON formatını kabul edileceği belirtiliyor.
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"{baseAddress}{endPoint}"),
+                Headers = { { HeaderNames.Accept, "application/json" } }
             };
 
-            var responseMessage = await client.SendAsync(requestMessage); // GET isteği gönderiliyor ve yanıt bekleniyor.
+            if (!string.IsNullOrEmpty(token))
+                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var jsonResponse = await responseMessage.Content.ReadAsStringAsync(); // Yanıtın içeriği (JSON formatında) string olarak alınıyor.
 
-            var responseObject = JsonSerializer.Deserialize<T>(jsonResponse, new JsonSerializerOptions()
-            {
-                PropertyNameCaseInsensitive = true // JSON'daki özellik adlarının büyük/küçük harf duyarsız şekilde eşleşmesini sağlar.
-            });
+            var responseMessage = await client.SendAsync(requestMessage);
 
-            return responseObject; // Deserilize edilmiş (T türüne dönüştürülmüş) yanıt döndürülüyor.
+            var jsonResponse = await responseMessage.Content.ReadAsStringAsync();
+
+            var responseObject = JsonSerializer.Deserialize<ResponseFromAPI<T>>(jsonResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+            return responseObject;
+
         }
 
         public async Task<bool> PostData(string endPoint, string jsonData, string token = null)
@@ -66,6 +74,10 @@ namespace ETicaretMVC.ApiServices
                 Headers = { { HeaderNames.Accept, "application/json" } }, // İsteğin JSON formatında kabul edilmesini belirtiyor.
                 Content = new StringContent(jsonData, Encoding.UTF8, "application/json")// Gönderilecek veri (jsonData) JSON formatına çevrilerek istek içeriği olarak ekleniyor.
             };
+            if (!string.IsNullOrEmpty(token)) // Eğer token boş değilse (yani token parametresi gönderilmişse).
+            {
+                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token); // İstek başlığına Bearer tipinde token ekleniyor.
+            }
             var responseMessage = await client.SendAsync(requestMessage);// İstek gönderiliyor ve yanıt asenkron olarak bekleniyor.
             if (!responseMessage.IsSuccessStatusCode)// Eğer yanıt başarı durumunda değilse (ör. 400, 500 hataları).
             {
@@ -89,6 +101,10 @@ namespace ETicaretMVC.ApiServices
                 Headers = { { HeaderNames.Accept, "application/json" } }, // İsteğin JSON formatında kabul edilmesini belirtiyor.
                 Content = new StringContent(jsonData, Encoding.UTF8, "application/json") // Gönderilecek veri (jsonData) JSON formatına çevrilerek istek içeriği olarak ayarlanıyor.
             };
+            if (!string.IsNullOrEmpty(token)) // Eğer token boş değilse (yani token parametresi gönderilmişse).
+            {
+                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token); // İstek başlığına Bearer tipinde token ekleniyor.
+            }
 
             var responseMessage = await client.SendAsync(requestMessage); // PUT isteği gönderiliyor ve yanıt bekleniyor.
 

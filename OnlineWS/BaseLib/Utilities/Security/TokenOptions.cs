@@ -1,4 +1,4 @@
-﻿namespace BaseLib.Utilities.Security
+﻿ namespace BaseLib.Utilities.Security
 {
    public class TokenOptions
     {

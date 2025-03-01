@@ -6,12 +6,12 @@ using System.Text;
 
 namespace BaseLib.Utilities.Security
 {
-    public class JwtGenerator
+    public class JwtGenerator 
     {
         private readonly IConfiguration _configuration; // appsettings.json ı okumak için
         private TokenOptions _tokenOptions; // appsettingsdeki datanın nesne karşılığı
         private DateTime _tokenExpiration; // token ın geçerlilik süresi
-        public JwtGenerator(IConfiguration configuration)
+        public JwtGenerator(IConfiguration configuration) 
         {
             _configuration = configuration;
             _tokenOptions = _configuration.GetSection("TokenOptions").Get<TokenOptions>();
@@ -46,7 +46,7 @@ namespace BaseLib.Utilities.Security
                    expires: _tokenExpiration,
                    notBefore: DateTime.Now,
                    signingCredentials: signingCredentials,
-                   claims: new List<Claim> { new Claim("KEY1", "VALUE1"), new Claim("KEY2", "VALUE2"), new Claim("KEY3", "VALUE3") }
+                   claims: new List<Claim> { new Claim("KEY1", "VALUE1" ), new Claim("KEY2", "VALUE2"), new Claim("KEY3", "VALUE3") }
                 );
 
             return jwtSecurityToken;

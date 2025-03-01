@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BaseLib.Utilities.ApiResponses
+﻿namespace BaseLib.Utilities.ApiResponses
 {
     public class ApiResponse<T>
     {

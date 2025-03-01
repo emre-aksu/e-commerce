@@ -34,6 +34,7 @@ namespace OnlineWS.WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        //[AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var categoryList=await _categoryManager.GetAllCategories();

@@ -10,6 +10,7 @@ namespace OnlineWS.WebAPI.Controllers
     [Authorize]
     public class ProductController : ControllerBase
     {
+      
         private readonly IProductManager _productManager;
         public ProductController(IProductManager productManager)
         {

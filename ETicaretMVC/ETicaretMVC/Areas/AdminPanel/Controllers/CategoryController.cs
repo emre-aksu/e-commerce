@@ -21,8 +21,11 @@ namespace ETicaretMVC.Areas.AdminPanel.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var viewModel = await _apiService.GetData<List<CategoryResponse>>("categories", token: null);
-            return View(viewModel);
+            var jwtToken = HttpContext.Session.GetString("JwtToken");
+
+            var viewModel = await _apiService.GetData<List<CategoryResponse>>("categories", token: jwtToken);
+
+            return View(viewModel.Data);
         }
 
         [HttpGet]
